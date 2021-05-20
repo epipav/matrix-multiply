@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+    matrix-app:
+        build:
+            context: ./
+            dockerfile: Dockerfile
+        command: > 
+            sh -c "vendor/bin/ecs check tests/Unit/MatrixOperationsTest.php classes/MatrixOperations.php routes/api.php --set psr12 &&
+                 php artisan test &&
+                 php artisan serve --host=0.0.0.0"  
+        image: anilbostanci/matrix-app:0.0.5
+        ports:
+            - "8000:8000"
+        working_dir: /matrix-app
