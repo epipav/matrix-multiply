@@ -1,85 +1,38 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Models\Matrix;
-use Illuminate\Http\Request;
+use Classes\MatrixOperations;
 
 class MatrixController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Multiply two matrices.
      *
-     * @return \Illuminate\Http\Response
+     * @param  array  $matrices_decoded
+     * 
+     * First matrix = $matrices_decoded[0]
+     * Second matrix = $matrices_decoded[1]
+     * 
      */
-    public function index()
+    public function multiply(array $matrices_decoded)
     {
-        //
-    }
+        $response = [];
+        $response["success"] = false;
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+        if (count($matrices_decoded) == 2) {
+            $multiplication = MatrixOperations::multiply($matrices_decoded[0], $matrices_decoded[1]);
+            if ($multiplication !== false) {
+                $response["success"] = true;
+                $response["result"] = $multiplication;
+                $response["result_stringified"] = MatrixOperations::stringify($multiplication);
+            } else {
+                $response["error"] = "Matrices are not multipliable.";
+            }
+        } else {
+            $response["error"] = "Please enter both matrices.";
+        }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Matrix  $matrix
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Matrix $matrix)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Matrix  $matrix
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Matrix $matrix)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Matrix  $matrix
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Matrix $matrix)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Matrix  $matrix
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Matrix $matrix)
-    {
-        //
+        return $response;
+    
     }
 }

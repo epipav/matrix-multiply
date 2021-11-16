@@ -11,8 +11,8 @@ class MatrixOperationsTest extends TestCase
 {
     public function test_matrix_multiplication_multipliable()
     {
-        $matrix_1 = [["1", "2", "3"]];
-        $matrix_2 = [["4"], ["5"], ["6"]];
+        $matrix_1 = [[1, 2, 3]];
+        $matrix_2 = [[4], [5], [6]];
         $function_result = MatrixOperations::multiply($matrix_1, $matrix_2);
 
         $asserted_result = [[32]];
