@@ -15,7 +15,7 @@ class MatrixOperationsTest extends TestCase
         $matrix_2 = [["4"], ["5"], ["6"]];
         $function_result = MatrixOperations::multiply($matrix_1, $matrix_2);
 
-        $asserted_result = [['AF']];
+        $asserted_result = [[32]];
         $this->assertEquals($asserted_result, $function_result);
     }
 

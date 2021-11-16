@@ -13,3 +13,7 @@ services:
         ports:
             - "8000:8000"
         working_dir: /matrix-app
+
+        # For development: bind code in host to the container
+        volumes:
+            - /home/anil/Documents/matrix-multiply:/matrix-app
